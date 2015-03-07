@@ -16,8 +16,8 @@ Display data in visiually appealing way for users.
 Service must be able to run on website
 
 # Tools
-Python
-Yelp API
-Foursquare API
-Django
-Google Cloud Engine or Heroku (Hosting)
+Python | 
+Yelp API |
+Foursquare API | 
+Django | 
+Google App Engine
