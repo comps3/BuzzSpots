@@ -2,6 +2,7 @@ import urllib2
 import simplejson
 import sys
 
+# Stores each locations name, location and all time checkin count
 class FoursquareStats:
     def __init__(self, name, lat, lng, checkins):
         self.name = name
@@ -18,17 +19,23 @@ class FoursquareStats:
         return self.checkins
 
 
-url = 'https://api.foursquare.com/v2/venues/search'
+search_url = 'https://api.foursquare.com/v2/venues/search'
+categories_url = 'https://api.foursquare.com/v2/venues/categories'
 location = '40.7,-74'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
 results = 50
-date = '20150306'
+categoriesC = 20
+subCategories = 5
+date = '20150307'
 businesses = []
+categoriesStore = {} # Dictionary
+query = ""
 
-full_url = url + '?ll=' + location + '&limit=' + `results` + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + date
-
-req  = urllib2.Request(full_url)
+full_search_url = search_url + '?ll=' + location + '&limit=' + `results` + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + date
+full_categories_url = categories_url + '?client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + date
+"""
+req  = urllib2.Request(full_search_url)
 opener = urllib2.build_opener()
 f = opener.open(req)
 
@@ -44,3 +51,20 @@ businesses.sort(key= lambda x: x.checkins, reverse=True)
 
 for j in range(0, len(businesses)):
     print businesses[j]
+"""
+# Pull foursquare categories API to allow users to search
+# for business within certain categories
+
+req  = urllib2.Request(full_categories_url)
+opener = urllib2.build_opener()
+f = opener.open(req)
+fsdata = simplejson.load(f)
+
+for categories in fsdata['response']['categories']:
+    categoriesStore[categories['name']] = categories['id']
+    #print "Name: " + categories['name']
+    #print "ID: " + categories['id']
+    for subCategories in categories['categories']:
+        categoriesStore[subCategories['name']] = subCategories['id']
+        #print "Subname: " + subCategories['name']
+        #print "SubID: " + subCategories['id']
