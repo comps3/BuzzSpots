@@ -22,8 +22,7 @@ class FoursquareStats:
 search_url = 'https://api.foursquare.com/v2/venues/search'
 categories_url = 'https://api.foursquare.com/v2/venues/categories'
 location = '40.7,-74'
-client_id = '***REMOVED***'
-client_secret = '***REMOVED***'
+
 results = 50
 categoriesC = 20
 subCategories = 5
