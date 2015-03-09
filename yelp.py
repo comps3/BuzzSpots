@@ -1,4 +1,6 @@
-from rauth import OAuth1Service
+import rauth
+import time
+import json
 
 def get_search_parameters(lat, long):
   # See the Yelp API for more details
@@ -8,7 +10,7 @@ def get_search_parameters(lat, long):
   params["radius_filter"] = "2000"
   params["limit"] = "10"
  
-  return params
+  return params 
 
 def get_results(params):
  
@@ -35,10 +37,15 @@ def get_results(params):
 def main():
   locations = [(39.98,-82.98),(42.24,-83.61),(41.33,-89.13)]
   api_calls = []
-  for lat,long in locations:
-    params = get_search_parameters(lat,long)
+  for lat, long in locations:
+    params = get_search_parameters(lat, long)
     api_calls.append(get_results(params))
-    #Be a good internet citizen and rate-limit yourself
+    # Be a good internet citizen and rate-limit yourself
     time.sleep(1.0)
      
-  ##Do other processing
+  # #Do other processing
+  print api_calls
+
+
+if __name__ == "__main__":
+    main()
