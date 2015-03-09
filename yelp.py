@@ -15,10 +15,10 @@ def get_search_parameters(lat, long):
 def get_results(params):
  
   # Obtain these from Yelp's manage access page
-  consumer_key = "***REMOVED***"
-  consumer_secret = "***REMOVED***"
-  token = "***REMOVED***"
-  token_secret = "***REMOVED***"
+  consumer_key = "YOUR_KEY"
+  consumer_secret = "YOUR_SECRET"
+  token = "YOUR_TOKEN"
+  token_secret = "YOUR_TOKEN_SECRET"
    
   session = rauth.OAuth1Session(
     consumer_key=consumer_key
