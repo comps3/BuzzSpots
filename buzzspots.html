@@ -12,15 +12,17 @@ html, body, #map-canvas {
 	src="https://maps.googleapis.com/maps/api/js?key=">
 </script>
 <script type="text/javascript">
+
+	var map, pointarray, heatmap;
+
 	function initialize() {
 
 		var mapOptions = {
-			center : {
-				lat : 37.7833,
-				lng : -122.4167
-			},
-			zoom : 8
-		};
+	    zoom: 13,
+	    center: new google.maps.LatLng(37.774546, -122.433523),
+	    mapTypeId: google.maps.MapTypeId.SATELLITE
+	  };
+
 		var map = new google.maps.Map(document.getElementById('map-canvas'),
 				mapOptions);
 	}
