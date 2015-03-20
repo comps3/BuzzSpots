@@ -2,9 +2,12 @@ import json
 import urllib2
 import simplejson
 import sys
+<<<<<<< HEAD
 import keys
 import yelp
 
+=======
+>>>>>>> origin/master
 from flask import Flask
 from flask import request
 
@@ -15,6 +18,7 @@ class FoursquareStats:
         self.lat = lat
         self.lng = lng
         self.checkins = checkins
+<<<<<<< HEAD
 
     def __str__(self):
         return "Latitude: " + `self.lat` + "\n" + "Longitude: " + `self.lng` + "\n"
@@ -27,11 +31,26 @@ app = Flask(__name__)
   # Pulls keys from keys python file
 client_id = keys.FOURSQUARE_CLIENT_ID
 client_secret = keys.FOURSQUARE_CLIENT_SECRET
+=======
+    def __str__(self):
+        return 'Location Name: ' + self.name + "\n" + "Latitude: " + `self.lat` + "\n" + "Longitude: " + `self.lng` + "\n" + "Checkins: " + `self.checkins` + "\n"
+    def businessName(self):
+        return self.name
+    def businessLocation(self):
+        return (self.lat, self.lng)
+    def businessCheckins(self):
+        return self.checkins
+
+# Please remove API keys before pushing to Github
+
+app = Flask(__name__)
+>>>>>>> origin/master
 
 results = 50
 date = '20150311'
 query = ""
 
+<<<<<<< HEAD
 #Testing yelp by passing sample location data in hopes of returning
 #correct restuarant data
 #yelp.get_yelp_resturantData("Mosaic Restaurant & Lounge - Four Points By Sheraton" ,37.338208, -121.886329)
@@ -40,6 +59,14 @@ query = ""
 # for business within certain categories
 
 # Flask
+=======
+# Pull foursquare categories API to allow users to search
+# for business within certain categories
+
+
+# Flask section
+# Program should make an API once visit the site
+>>>>>>> origin/master
 @app.route("/")
 def test():
     if 'q' in request.args:
@@ -71,9 +98,16 @@ def foursquare_stats():
     fsdata = simplejson.load(f)
 
     for location in fsdata['response']['venues']:
+<<<<<<< HEAD
         # Develop ranking algorithm for businesses popularity
             businesses.append(FoursquareStats(location['name'] ,location['location']['lat'],
             location['location']['lng'], location['stats']['checkinsCount']))
+=======
+        businesses.append(FoursquareStats(location['name'],
+        location['location']['lat'],
+        location['location']['lng'],
+        location['stats']['checkinsCount']))
+>>>>>>> origin/master
 
     return json.dumps([p.__dict__ for p in businesses])
 
@@ -113,6 +147,9 @@ def foursquare_categories():
 
     return json.dumps(categoriesStore)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 if __name__ == '__main__':
     app.run(debug=True)
