@@ -1,6 +1,5 @@
 import rauth
 import time
-import json
 
 def get_search_parameters(lat, long):
   # See the Yelp API for more details
@@ -15,10 +14,10 @@ def get_search_parameters(lat, long):
 def get_results(params):
  
   # Obtain these from Yelp's manage access page
-  consumer_key = "YOUR_KEY"
-  consumer_secret = "YOUR_SECRET"
-  token = "YOUR_TOKEN"
-  token_secret = "YOUR_TOKEN_SECRET"
+  consumer_key = "PEP9wduubPZo7upPk5b1ZQ"
+  consumer_secret = "MT7DaRQZlcqRyJ3ZRZPL1XXaVtA"
+  token = "T22PIVMgEYHk_rNo2sjKMiJaWS7McEwU"
+  token_secret = "h24w1SHErdP6Bw8PbGry9ascqBo"
    
   session = rauth.OAuth1Session(
     consumer_key=consumer_key
@@ -35,7 +34,7 @@ def get_results(params):
   return data
 
 def main():
-  locations = [(39.98,-82.98),(42.24,-83.61),(41.33,-89.13)]
+  locations = [(37.7833, -122.4167)]
   api_calls = []
   for lat, long in locations:
     params = get_search_parameters(lat, long)
