@@ -13,9 +13,9 @@ def get_search_parameters(lat, long):
 
 def get_results(params):
  
-  # Obtain these from Yelp's manage access page
+   # Obtain these from Yelp's manage access page
   consumer_key = ""
-  consumer_secret = "" 
+  consumer_secret = ""
   token = ""
   token_secret = ""
    
@@ -33,8 +33,8 @@ def get_results(params):
    
   return data
 
-def main():
-  locations = [(37.7833, -122.4167)]
+def beginYelpFetch(latIn, longIn):    
+  locations = [(latIn, longIn)]
   api_calls = []
   for lat, long in locations:
     params = get_search_parameters(lat, long)
