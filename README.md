@@ -1,23 +1,22 @@
 # BuzzSpots
-Users will be able to see the busiest local businesses in any city with data from Foursquare 
-and get information about those local businesses with Yelp's data. 
+Users will be able to see the busiest local businesses in any city with data from Foursquare
+and receive information about those local businesses with Yelp's API.
 
 # Features
-Utitlize Yelp API to provide users restaurant information.
-Using Foursquare API we will be able to visiualize local businesses that have
-high amount of traffic in a certain region.
-If time persist in future, users can search for businesses popularity
-via custom search terms.
+Utitlize Yelp API to provide users local business information.
+Use Foursquare API to determine how busy a local business is through
+a businesses check in count.
+In the future, users will be able to search for any kind of businesses popularity
+via search terms.
 
 # Tasks to be accomplished
-Retrieve restaurant data from Yelp API.
-Retrieve check-in data from Foursquares API.
-Display data in visiually appealing way for users.
-Service must be able to run on website
+Display locations by placing markers on a map.
+Service must be able to run on website.
+All files will be hosted on Google App Engine.
 
 # Tools
-Python | 
+Python |
 Yelp API |
-Foursquare API | 
-Django | 
+Foursquare API |
+Flask |
 Google App Engine
