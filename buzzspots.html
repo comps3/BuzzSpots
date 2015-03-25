@@ -1,40 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Data Visualisation</title>
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true">
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<title>BuzzSpots</title>
+<style>
+html, body, #map-canvas {
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+</style>
+<script
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true">
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoZk9XSdzK0D8Mxlan8zfJ0_EdNQvB5JM"></script>
-    <script>
-function initialize(latIn,longIn) {
-	
-  var myLatlng = new google.maps.LatLng(latIn,longIn);
+<script>
+function initialize() {
+
+	<!-- Storing Json locations into location array -->
+  var locations = [
+  [37.44888168254265, 4.0, -122.15851976089174, 4854, "Tamarine Restaurant"],
+  [37.39454485765165, 4.0, -122.07864297542973, 2377, "Asian Box"],
+    [37.32720525574808, 3.5, -122.01355934143066, 4522, "Benihana"],
+    [37.44634807192977, 3.5, -122.16104233169347, 347, "Burma Ruby"],
+    [37.38703782798459, 3.5, -121.88747406005858, 589, "Izzo Restaurant Taiwanese Fusion"],
+    [37.32180605556545, 3.0, -121.94794707816047, 9044, "Straits"],
+    [37.25426648091562, 3.5, -121.83121527051422, 3041, "Kenzo Sushi"],
+    [37.42530236666666, 2.5, -122.14673891, 1545, "Panda Express"],
+    [37.332382966675056, 3.0,-121.88804871312483, 1356, "Mosaic Restaurant & Lounge - Four Points By Sheraton"],
+    [37.3323345948416, 3.5, -121.88464432954787, 216,"Boba Bar Teahouse & Eatery"],
+    [37.39489934481892, 3.5, -122.07856529953106, 7278, "Xanh Restaurant"],
+    [37.34913938341103, 3.5, -121.89368988194416, 3969, "Hukilau"],
+    [37.30807147352021, 4.0, -121.95034122393665, 5072, "Mizu Sushi Bar & Grill"],
+    [37.445084450750656, 4.0, -122.16306034576229, 2888, "Rangoon Ruby"],
+    [37.58696252579951, 3.5, -122.01836585998534, 1433, "Tadamasa"]];
+
+  <!-- Initializing map location -->
+  var myLatlng = new google.maps.LatLng(37.44888168254265, -122.15851976089174);
   var mapOptions = {
-    zoom: 15,
+    zoom: 9,
     center: myLatlng
   }
+  <!-- Initializing map and then drawing the map -->
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Data Visualisation!'
-  });
-}
+  <!-- Creating info windows for markers -->
+  var infowindow = new google.maps.InfoWindow();
 
+  <!-- Creating the markers and setting colors according to checkins -->
+  var marker, i;
+ for(i = 0; i < locations.length; i++) {
+ 	var markerColor;
+ 	
+ 	if(locations[i][3] > 100) {
+ 		markerColor = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+ 	}
+ 	if(locations[i][3] > 400) {
+ 		markerColor = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+ 	}
+ 	if(locations[i][3] > 1000) {
+ 		markerColor = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+ 	}
+ 	<!-- Adding the markers to the map according to latitude and longitude locations -->
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][0], locations[i][2]),
+        map: map,
+        title: locations[i][4],
+        icon: markerColor
+    });
+    <!-- If Marker is clicked or tapped on the info window will pop up with information of location -->
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              var infoString = locations[i][4] + "<br><br> Foursquare Check-Ins: " + locations[i][3] + " <br> Yelp Rating: "
+              + locations[i][1];
+              infowindow.setContent(infoString);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+  }
+}
+<!-- Initializing the function -->
 google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-  </body>
+</head>
+<body>
+	<div id="map-canvas"></div>
+</body>
 </html>
+
